@@ -36,26 +36,6 @@ describe("ReCAPTCHA", () => {
       expect(instance).toBeTruthy();
     });
   });
-  it("reset, should call grecaptcha.reset with the widget id", () => {
-    const WIDGET_ID = "someWidgetId";
-    const grecaptchaMock = {
-      render() {
-        return WIDGET_ID;
-      },
-      reset: jest.fn(),
-    };
-    const ReCaptchaRef = React.createRef();
-    ReactTestUtils.renderIntoDocument(
-      <ReCAPTCHA
-        sitekey="xxx"
-        grecaptcha={grecaptchaMock}
-        ref={ReCaptchaRef}
-        onChange={jest.fn()}
-      />,
-    );
-    ReCaptchaRef.current.reset();
-    expect(grecaptchaMock.reset).toBeCalledWith(WIDGET_ID);
-  });
   it("execute, should call grecaptcha.execute with the widget id", () => {
     const WIDGET_ID = "someWidgetId";
     const grecaptchaMock = {

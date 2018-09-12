@@ -33,12 +33,6 @@ export default class ReCAPTCHA extends React.Component {
     }
   }
 
-  reset() {
-    if (this.props.grecaptcha && this._widgetId !== undefined) {
-      this.props.grecaptcha.reset(this._widgetId);
-    }
-  }
-
   handleExpired() {
     if (this.props.onExpired) {
       this.props.onExpired();
@@ -80,15 +74,6 @@ export default class ReCAPTCHA extends React.Component {
 
   componentDidUpdate() {
     this.explicitRender();
-  }
-
-  componentWillUnmount() {
-    if (this._widgetId !== undefined) {
-      while (this.captcha.firstChild) {
-        this.captcha.removeChild(this.captcha.firstChild);
-      }
-      this.reset();
-    }
   }
 
   handleRecaptchaRef(elem) {

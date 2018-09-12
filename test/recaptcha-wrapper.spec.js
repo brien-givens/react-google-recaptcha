@@ -19,20 +19,16 @@ const grecaptchaMock = {
 };
 
 describe("ReCAPTCHAWrapper", () => {
-  beforeEach(() => {
-    window.grecaptcha = grecaptchaMock;
-  });
-  afterEach(() => {
-    delete window.grecaptcha;
-  });
   it("should be wrapped properly", () => {
-    expect(ReCAPTCHA.displayName).toBe("AsyncScriptLoader(ReCAPTCHA)");
+    expect(ReCAPTCHA.render().type.displayName).toBe("AsyncScriptLoader(ReCAPTCHA)");
   });
   it("should proxy functions", () => {
+    window.grecaptcha = grecaptchaMock;
     const ReCaptchaRef = React.createRef();
     ReactTestUtils.renderIntoDocument(
       <ReCAPTCHA sitekey="xxx" ref={ReCaptchaRef} onChange={jest.fn()} />,
     );
     expect(ReCaptchaRef.current.getValue()).toBe(VALUE);
+    delete window.grecaptcha;
   });
 });
